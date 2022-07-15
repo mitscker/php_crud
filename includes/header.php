@@ -1,3 +1,19 @@
+<?php
+
+session_start();
+
+// validate if session it's activated
+if(!empty($_SESSION["activo"])) {
+  header("Location:panel.php"); // redirect if session exist
+}
+
+$id_usuario = $_SESSION["id_usuario"];
+$nombre = $_SESSION["nombre"];
+$email = $_SESSION["email"];
+
+include_once("../conn_sqlserver.php");
+
+?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from

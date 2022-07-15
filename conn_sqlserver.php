@@ -4,10 +4,10 @@
     $db_user = "mitscker";
     $pass_user = "mits357";
 
-    $dns = "sqlsrv:Server=mitscker\\SQLEXPRESS02;Database=notas_php"; $db_user;$pass_user;
+    $dsn = "sqlsrv:Server=XFVLAPTOP\\SQLEXPRESS02;Database=notas_php"; $db_user;$pass_user;
 
     try {
-        $conn = new PDO($dns);
+        $conn = new PDO($dsn);
 
         // show messsage for sucess conection
         if($conn) {

@@ -1,3 +1,48 @@
+<?php
+
+session_start();
+
+// validate if session it's activated
+if(!empty($_SESSION["activo"])) {
+  header("Location:panel.php"); // redirect if session exist
+}
+
+// include connection file
+include_once("conn_sqlserver.php");
+
+if(isset($_POST["ingresar"])) {
+  $email = $_POST["email"];
+  $password = md5($_POST["password"]);
+
+  if(!empty($email) && $email != "" && !empty($password) && $password != "") {
+    $query = "SELECT id, email, nombre, telefono, password, es_admin FROM usuario WHERE email =:email and password =:password;"; // passing 'positional parameters'
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR); // binding 'positional param'
+    $stmt->bindParam(":password", $password, PDO::PARAM_STR); // binding 'positional param'
+
+    $resultado = $stmt->execute();
+    $registro = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!$registro) {
+      $error = "Error, invalid access";
+    } else {
+      // create session
+      $_SESSION["activo"] = true;
+      $_SESSION["id_usuario"] = $registro["id"];
+      $_SESSION["nombre"] = $registro["nombre"];
+      $_SESSION["email"] = $registro["email"];
+      $_SESSION["es_admin"] = $registro["es_admin"];
+      
+      // after create sessions, redirect to panel.php
+      header("Location:panel.php");
+    }
+  } else {
+    $error = "Error, some fields are empty";
+  }
+}
+
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -29,31 +74,18 @@
   </head>
   <body class="hold-transition login-page">
 
-  <div class="row">
-    <div class="col-sm-12">
-   
-
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Mensaje
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>           
-
-      
+    <div class="row">
+      <div class="col-sm-12">
+        <?php if(isset($error)) : ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><?php echo $error; ?></strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <?php endif; ?>
     </div>
-</div>
-
-  <div class="row">
-    <div class="col-sm-12">
-      
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error</strong> 
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-      
-    </div>
-</div>
+  </div>
 
 
 
