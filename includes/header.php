@@ -1,16 +1,18 @@
 <?php
 
-session_start();
+session_start(); // init sessions
 
 // validate if session it's activated
 if(!empty($_SESSION["activo"])) {
   header("Location:panel.php"); // redirect if session exist
 }
 
+// session variables
 $id_usuario = $_SESSION["id_usuario"];
 $nombre = $_SESSION["nombre"];
 $email = $_SESSION["email"];
 
+// add connection to every views globally
 include_once("../conn_sqlserver.php");
 
 ?>
