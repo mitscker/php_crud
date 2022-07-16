@@ -10,11 +10,11 @@
         $conn = new PDO($dsn);
 
         // show messsage for sucess conection
-        if($conn) {
-            echo "connected to db";
-        } else {
-            echo "Not connected to db";
-        }
+        // if($conn) {
+        //     echo "connected to db";
+        // } else {
+        //     echo "Not connected to db";
+        // }
     } catch (PDOException $e) {
         // show message error
         echo $e->getMessage();
