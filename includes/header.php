@@ -82,8 +82,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="dist/img/images.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">         
-          <p class="text-white">test</p>
-          <p class="text-white">test email</p>
+          <p class="text-white"><?php echo $nombre; ?></p>
+          <p class="text-white"><?php echo $email; ?></p>
         </div>
       </div>
 
