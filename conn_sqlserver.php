@@ -1,10 +1,10 @@
 <?php 
 
     // configurate access data to database
-    $db_user = "mitscker";
-    $pass_user = "mits357";
+    $db_user = "php_user";
+    $pass_user = "php_password";
 
-    $dsn = "sqlsrv:Server=XFVLAPTOP\\SQLEXPRESS02;Database=notas_php"; $db_user;$pass_user;
+    $dsn = "sqlsrv:Server=MITSCKER\\SQLEXPRESS;Database=notas_php"; $db_user;$pass_user;
 
     try {
         $conn = new PDO($dsn);
