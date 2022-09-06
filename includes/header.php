@@ -4,7 +4,7 @@ session_start(); // init sessions
 
 // validate if session it's activated
 if(!$_SESSION["activo"]) {
-  header("Location:index.php"); // redirect if session exist
+  header("Location:index.php"); // redirect if session not exist
 }
 
 // session variables
